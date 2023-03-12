@@ -19,4 +19,9 @@ class UserQuestion extends Model
     {
         return $this->hasMany(Answer::class, 'question_id', 'question_id');
     }
+
+    public function user_question_session()
+    {
+        return $this->hasOne(UserQuizSession::class, 'id', 'this_table_related_id');
+    }
 }
