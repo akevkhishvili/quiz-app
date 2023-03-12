@@ -19,7 +19,6 @@ return new class extends Migration
                 ->constrained()
                 ->CascadeOnUpdate()
                 ->restrictOnDelete();
-            $table->integer('correct_answer_id');
             $table->timestamps();;
         });
     }
