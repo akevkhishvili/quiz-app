@@ -19,6 +19,7 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->restrictOnDelete();
             $table->integer('total_correct_answers')->default(0);
+            $table->integer('unanswered_questions')->default(10);
             $table->integer('total_quiz_time')->nullable();
             $table->timestamps();
         });
