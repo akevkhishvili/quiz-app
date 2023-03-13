@@ -21,5 +21,12 @@ class AdminUserSeeder extends Seeder
             'password'=>Hash::make('admin'),
             'is_admin'=>1
         ]);
+
+        User::factory()->create([
+            'name'=>'user',
+            'email'=>'user@user.com',
+            'email_verified_at'=>now(),
+            'password'=>Hash::make('user'),
+        ]);
     }
 }
