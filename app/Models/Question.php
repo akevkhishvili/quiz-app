@@ -11,7 +11,9 @@ class Question extends Model
 {
     use HasFactory;
 
-    public function question_mode(): HasOne
+    protected $guarded=['id'];
+
+    public function QuestionMode(): HasOne
     {
         return $this->hasOne(QuestionMode::class, 'id', 'question_mode_id');
     }

@@ -18,9 +18,9 @@ return new class extends Migration {
         });
         DB::table('question_modes')->insert([
             [
-                'name' => 'Binary'
+                'name' => 'binary'
             ], [
-                'name' => 'Multiple choice'
+                'name' => 'multichoice'
             ]
         ]);
     }

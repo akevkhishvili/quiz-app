@@ -13,10 +13,7 @@ class TempQuestionsSeeder extends Seeder
      */
     public function run(): void
     {
-
         $array =  range(1,10);
-
-        //dd($array);
 
         foreach($array as $value){
             $question = Question::create([
@@ -25,10 +22,14 @@ class TempQuestionsSeeder extends Seeder
             ]);
 
            foreach([1,2] as $item){
+               $is_correct = $item;
+               if($item != 1){
+                   $is_correct = null;
+               }
                Answer::create([
                    'question_id'=>$question->id,
                    'text'=>$item + $value,
-                   'is_correct'=>$item,
+                   'is_correct'=>$is_correct,
                ]);
            }
         }

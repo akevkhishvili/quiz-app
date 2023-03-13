@@ -17,9 +17,9 @@ return new class extends Migration
             $table->foreignIdFor(Question::class)
                 ->constrained()
                 ->CascadeOnUpdate()
-                ->restrictOnDelete();
+                ->CascadeOnDelete();
             $table->text('text');
-            $table->integer('is_correct');
+            $table->integer('is_correct')->nullable();
             $table->timestamps();
         });
     }
