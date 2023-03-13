@@ -34,7 +34,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware('auth')->group(function () {
+
+Route::group(['middleware' => ['auth', 'is_admin']], function () {
 
     Route::get('/questions', [QuestionController::class, 'index'])->name('questions');
     Route::get('/question/add', [AddQuestionController::class, 'index'])->name('question.add');
@@ -46,7 +47,7 @@ Route::middleware('auth')->group(function () {
     //multichoise
     Route::get('/question/multichoice', [AddQuestionController::class, 'multichoice'])->name('question.multichoice');
     Route::post('/question/multichoice/store', [AddQuestionController::class, 'multichoice_store'])->name('question.multichoice.store');
-
 });
+
 
 require __DIR__ . '/auth.php';

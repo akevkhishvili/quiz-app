@@ -1,6 +1,9 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link, usePage } from '@inertiajs/vue3';
+import { computed } from 'vue'
+const user = computed(() => usePage().props.auth.user)
+
 </script>
 
 <template>
@@ -9,12 +12,12 @@ import { Head, Link } from '@inertiajs/vue3';
     <AuthenticatedLayout>
         <template #header>
 
-            <Link :href="route('questions')"
+            <Link v-if="user.is_admin" :href="route('questions')"
                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Questions
             </Link>
 
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-1">
+            <button v-if="user.is_admin" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-1">
                 User Quiz History
             </button>
         </template>
