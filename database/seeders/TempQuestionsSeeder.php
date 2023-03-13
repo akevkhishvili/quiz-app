@@ -33,5 +33,22 @@ class TempQuestionsSeeder extends Seeder
                ]);
            }
         }
+
+        $question = Question::create([
+            "question"=>"5 + 6 = ?",
+            'question_mode_id'=>2,
+        ]);
+
+        foreach(['answer_one', 'answer_two', 'answer_tree'] as  $index => $item){
+            $is_correct = null;
+            if ($item == "answer_two") {
+                $is_correct = 1;
+            }
+               Answer::create([
+                   'question_id'=>$question->id,
+                   'text'=>$index + 10,
+                   'is_correct'=>$is_correct,
+               ]);
+           }
     }
 }
