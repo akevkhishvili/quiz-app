@@ -139,7 +139,7 @@ const submit = () => {
                                         {{score.total_quiz_time}} sec
                                     </td>
                                     <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">
-                                        {{moment(score.updated_at).format("DD-MM-YYYY")}}
+                                        {{moment(score.updated_at).format("DD-MM-YYYY h:mm:ss")}}
                                     </td>
                                 </tr>
                                 </tbody>
