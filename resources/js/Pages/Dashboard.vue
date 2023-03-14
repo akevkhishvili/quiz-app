@@ -139,9 +139,8 @@ const submit = () => {
                                         {{score.total_quiz_time}} sec
                                     </td>
                                     <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">
-                                        {{score.updated_at}}
+                                        {{moment(score.updated_at).format("DD-MM-YYYY")}}
                                     </td>
-
                                 </tr>
                                 </tbody>
                             </table>
@@ -152,3 +151,13 @@ const submit = () => {
         </div>
     </AuthenticatedLayout>
 </template>
+<script>
+import moment from "moment";
+export default {
+    data() {
+        return {
+            moment: moment
+        }
+    }
+}
+</script>
