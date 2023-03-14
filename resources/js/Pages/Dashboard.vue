@@ -30,9 +30,9 @@ const submit = () => {
                 Questions
             </Link>
 
-            <button v-if="user.is_admin" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-1">
+<!--            <button v-if="user.is_admin" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-1">
                 User Quiz History
-            </button>
+            </button>-->
         </template>
 
         <div class="py-12">

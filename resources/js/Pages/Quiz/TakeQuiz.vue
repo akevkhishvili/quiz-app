@@ -4,9 +4,9 @@ import {Head, Link, useForm} from '@inertiajs/vue3';
 import InputError from '@/Components/InputError.vue';
 
 const props = defineProps({
-    time_left: Object,
+    time_left: Number,
     question: Object,
-    user_question_id: Object,
+    user_question_id: Number,
 })
 
 const form = useForm({
@@ -19,6 +19,38 @@ const submit = () => {
     form.post(route('quiz.question.submit'));
 };
 
+let disabled = false;
+
+</script>
+
+<script>
+export default {
+    props: {
+        time_left: Object.data,
+    },
+    data() {
+        return {
+            countDown: this.time_left
+        }
+    },
+    methods: {
+        countDownTimer() {
+            if (this.countDown > 0) {
+                setTimeout(() => {
+                    this.countDown -= 1
+                    this.countDownTimer()
+                }, 1000)
+                if (this.countDown < 1) {
+                    window.location.reload()
+                }
+            }
+        }
+    },
+    created() {
+        this.countDownTimer()
+    },
+
+}
 </script>
 
 <template>
@@ -57,6 +89,9 @@ const submit = () => {
                                 </li>
                             </ol>
                         </nav>
+                        <div>
+                            <span class="countdown font-mono text-6xl">{{ countDown }}</span>
+                        </div>
                         <div v-if="$page.props.flash.message"
                              id="alert-additional-content-3"
                              class="custom-info-alert"
@@ -65,20 +100,18 @@ const submit = () => {
                                 {{ $page.props.flash.message }}
                             </div>
                         </div>
+                        <p class="text-2xl mb-2">question:</p>
                         <form @submit.prevent="submit">
                             <div>
-                                <h1 class="text-2xl mb-2">question:</h1>
                                 <p class="mb-3">{{ props.question.question }}</p>
-
                                 <div v-for="(answer, index) in props.question.answer"
                                      class="flex items-center mb-4">
-                                    <!--v-if="$page.props.flash.message disabled"-->
                                     <input
                                         :disabled="$page.props.flash.message ? '' : disabled"
                                         v-model="form.answer_id" :id="index + 'default-radio'"
-                                           type="radio" :value="answer.id"
-                                           name="default-radio"
-                                           class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        type="radio" :value="answer.id"
+                                        name="default-radio"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                     <label for="default-radio-1"
                                            class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                         {{ answer.text }}
@@ -86,15 +119,15 @@ const submit = () => {
                                 </div>
                                 <InputError class="mt-2" :message="form.errors.answer_id"/>
                             </div>
-
-                            <button :disabled="form.processing"  v-if="!$page.props.flash.message"
+                            <button :disabled="form.processing" v-if="!$page.props.flash.message"
                                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2 ">
                                 submit
                             </button>
-
                         </form>
                         <div v-if="$page.props.flash.message">
-                            <Link :href="route('quiz.confirm',[props.user_question_id])" :data="{ user_question_id: props.user_question_id }" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2 ">
+                            <Link :href="route('quiz.confirm',[props.user_question_id])"
+                                  :data="{ user_question_id: props.user_question_id }"
+                                  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2 ">
                                 Next
                             </Link>
                         </div>
@@ -103,6 +136,6 @@ const submit = () => {
                 </div>
             </div>
         </div>
-
     </AuthenticatedLayout>
 </template>
+
