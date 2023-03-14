@@ -1,11 +1,12 @@
 <?php
 
 use App\Http\Controllers\AddQuestionController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\QuizController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,19 +23,24 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
+    //dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    //profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    //quizz
+    Route::get('/start', [QuizController::class, 'start'])->name('start');
+    Route::post('/quiz/question/submit', [QuizController::class, 'submit'])->name('quiz.question.submit');
+    Route::get('/quiz/{session_id}', [QuizController::class, 'quiz_session'])->name('quiz');
+    Route::get('/quiz/confirm/{user_question_id}', [QuizController::class, 'quiz_confirm'])->name('quiz.confirm');
+    Route::get('/quiz/score/{session_id}', [QuizController::class, 'quiz_score'])->name('quiz.score');
 });
 
 
 Route::group(['middleware' => ['auth', 'is_admin']], function () {
-
+    //question management
     Route::get('/questions', [QuestionController::class, 'index'])->name('questions');
     Route::get('/question/add', [AddQuestionController::class, 'index'])->name('question.add');
     Route::post('/question/mode', [AddQuestionController::class, 'mode'])->name('question.mode');

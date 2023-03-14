@@ -29,6 +29,8 @@ return new class extends Migration
                 ->CascadeOnUpdate()
                 ->restrictOnDelete();
             $table->string('is_correct')->nullable();
+            $table->string('answer_id')->nullable();
+            $table->string('confirmed')->nullable();
             $table->timestamps();
         });
     }

@@ -10,6 +10,8 @@ class UserQuestion extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function question()
     {
         return $this->hasOne(Question::class, 'id', 'question_id');

@@ -23,12 +23,14 @@ class TempQuestionsSeeder extends Seeder
 
            foreach([1,2] as $item){
                $is_correct = $item;
+               $text = "true";
                if($item != 1){
                    $is_correct = null;
+                   $text = "false";
                }
                Answer::create([
                    'question_id'=>$question->id,
-                   'text'=>$item + $value,
+                   'text'=>$text,
                    'is_correct'=>$is_correct,
                ]);
            }

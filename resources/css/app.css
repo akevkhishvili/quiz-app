@@ -21,3 +21,7 @@
 .custom-error-alert {
     @apply mx-5 mt-5 p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800
 }
+
+.custom-info-alert {
+    @apply mt-5 p-4 mb-4 text-black border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800
+}

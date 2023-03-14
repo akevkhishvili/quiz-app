@@ -11,7 +11,7 @@ class Question extends Model
 {
     use HasFactory;
 
-    protected $guarded=['id'];
+    protected $guarded = ['id'];
 
     public function QuestionMode(): HasOne
     {
