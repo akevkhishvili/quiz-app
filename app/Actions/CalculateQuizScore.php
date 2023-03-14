@@ -12,7 +12,6 @@ class CalculateQuizScore
             ->where('user_quiz_session_id', $session->id)
             ->orderBy('updated_at', 'DESC')
             ->get();
-//dd($session->created_at,$user_question[0]->updated_at);
 
         $total_quiz_time = $user_question[0]->updated_at->diffInSeconds($session->created_at);
         $unanswered_questions = $user_question->whereNull('answer_id')->count();

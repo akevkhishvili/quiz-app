@@ -8,7 +8,6 @@ use App\Actions\GetQuestion;
 use App\Actions\TimeLeft;
 use App\Http\Requests\QuestionModeRequest;
 use App\Models\Answer;
-use App\Models\Question;
 use App\Models\UserQuestion;
 use App\Models\UserQuizSession;
 use Illuminate\Http\Request;
