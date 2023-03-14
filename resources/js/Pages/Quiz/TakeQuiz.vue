@@ -26,7 +26,9 @@ let disabled = false;
 <script>
 export default {
     props: {
-        time_left: Object.data,
+        params:{
+            time_left: Object.data,
+        }
     },
     data() {
         return {
@@ -40,7 +42,7 @@ export default {
                     this.countDown -= 1
                     this.countDownTimer()
                 }, 1000)
-                if (this.countDown < 1) {
+                if (this.countDown <= 1) {
                     window.location.reload()
                 }
             }
@@ -49,7 +51,6 @@ export default {
     created() {
         this.countDownTimer()
     },
-
 }
 </script>
 

@@ -29,10 +29,6 @@ const submit = () => {
                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Questions
             </Link>
-
-<!--            <button v-if="user.is_admin" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-1">
-                User Quiz History
-            </button>-->
         </template>
 
         <div class="py-12">
@@ -116,8 +112,11 @@ const submit = () => {
                                     <th scope="col" class="px-6 py-3">
                                         unanswered questions
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
                                         total time
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Quiz Submit Date
                                     </th>
                                 </tr>
                                 </thead>
@@ -139,6 +138,10 @@ const submit = () => {
                                     <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">
                                         {{score.total_quiz_time}} sec
                                     </td>
+                                    <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">
+                                        {{score.updated_at}}
+                                    </td>
+
                                 </tr>
                                 </tbody>
                             </table>
