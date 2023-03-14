@@ -16,6 +16,7 @@ class QuizController extends Controller
 {
     public function start(QuestionModeRequest $request, CurrentQuizSession $getQuizSession)
     {
+
         $request = $request->validated();
         $session = $getQuizSession($request['question_mode_id']);
         if ($session['error']) {

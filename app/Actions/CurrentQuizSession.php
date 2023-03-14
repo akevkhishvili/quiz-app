@@ -16,6 +16,8 @@ class CurrentQuizSession
         $quizSession = UserQuizSession::query()
             ->where('user_id', Auth::user()->id)
             ->where('created_at', '>', Carbon::now()->subMinutes(5))
+            ->whereNull('total_quiz_time')
+            ->where('question_mode_id',$quiz_mode_id)
             ->orderBy('id', 'DESC')
             ->first();
 
@@ -35,6 +37,7 @@ class CurrentQuizSession
 
             $quizSession = UserQuizSession::create([
                 'user_id' => Auth::user()->id,
+                'question_mode_id'=>$quiz_mode_id
             ]);
 
             foreach ($questions as $question) {
