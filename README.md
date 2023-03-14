@@ -72,6 +72,6 @@ php artisan test
 >- user: ***admin@example.com***
 >- password: ***admin***
 
-### Admin User credentials for testing web page
+### User credentials for testing web page
 >- user: ***user@example.com***
 >- password: ***user***
