@@ -28,6 +28,12 @@ class QuizController extends Controller
 
     public function submit(Request $request)
     {
+         $request->validate([
+            'id' => 'required|numeric',
+            'user_question_id' => 'required|numeric',
+            'answer_id' => 'required|numeric'
+        ]);
+        
         $answer = Answer::find($request->input('answer_id'));
 
         UserQuestion::find($request->input('user_question_id'))->update([
