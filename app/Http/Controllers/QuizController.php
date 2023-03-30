@@ -7,6 +7,7 @@ use App\Actions\CurrentQuizSession;
 use App\Actions\GetQuestion;
 use App\Actions\TimeLeft;
 use App\Http\Requests\QuestionModeRequest;
+use App\Http\Requests\UpdateUserQuestion;
 use App\Models\Answer;
 use App\Models\UserQuestion;
 use App\Models\UserQuizSession;
@@ -26,19 +27,15 @@ class QuizController extends Controller
         return to_route('quiz', ['session_id' => $session['quizSession']->id]);
     }
 
-    public function submit(Request $request)
+    public function submit(UpdateUserQuestion $request)
     {
-         $request->validate([
-            'id' => 'required|numeric',
-            'user_question_id' => 'required|numeric',
-            'answer_id' => 'required|numeric'
-        ]);
-        
-        $answer = Answer::find($request->input('answer_id'));
+        $validated =$request->validated();
 
-        UserQuestion::find($request->input('user_question_id'))->update([
+        $answer = Answer::findOrFail($validated['answer_id']);
+
+        UserQuestion::find($validated['user_question_id'])->update([
             'is_correct' => $answer->is_correct,
-            'answer_id' => $request->input('answer_id')
+            'answer_id' => $validated['answer_id']
         ]);
 
         if ($answer->is_correct) {
